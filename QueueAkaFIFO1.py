@@ -1,6 +1,6 @@
 class QueueError(Exception):  # Choose base class for the new exception.
-    def __init__(self):
-        Exception.__init__(self)
+    def __init__(self, message):
+        super().__init__("Queue is empty")
     #
     #  Write code here
     #
@@ -20,12 +20,12 @@ class Queue:
         #
 
     def get(self):
-        try:
+        if len(self.__Queue_list) != 0:
             val = self.__Queue_list[-1]
             del self.__Queue_list[-1]
             return val
-        except QueueError:
-            print("Queue error")
+        else:
+            raise QueueError
         #
         # Write code here
         #
@@ -40,3 +40,4 @@ try:
         print(que.get())
 except:
     print("Queue error")
+
